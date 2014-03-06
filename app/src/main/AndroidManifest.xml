@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.android_ui_webservice.app.ArticleDetails"
+            android:label="@string/title_activity_article_details" >
+        </activity>
     </application>
 
 </manifest>
