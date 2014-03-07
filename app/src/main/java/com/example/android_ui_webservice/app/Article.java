@@ -8,6 +8,14 @@ public class Article {
     private String img;
     private String name;
     private String description;
+    private Double price;
+
+    public Article(String img, String name, String description, Double price){
+        this.img = img;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 
     public String getImg() {
         return img;
@@ -41,5 +49,4 @@ public class Article {
         this.price = price;
     }
 
-    private Double price;
 }
