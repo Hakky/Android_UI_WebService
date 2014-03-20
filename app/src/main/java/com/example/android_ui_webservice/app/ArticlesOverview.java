@@ -29,14 +29,9 @@ public class ArticlesOverview extends Activity {
         title.setText(category.getName());
         //artList = category.getArticles();
 
-        artList.add(new Article("sjd", "Super produit", "j'ai dit super produit", 2345.0));
-        artList.add(new Article("sjd", "Super produit", "j'ai dit super produit", 2345.0));
-        artList.add(new Article("sjd", "Super produit", "j'ai dit super produit", 2345.0));
-        artList.add(new Article("sjd", "Super produit", "j'ai dit super produit", 2345.0));
-        artList.add(new Article("sjd", "Super produit", "j'ai dit super produit", 2345.0));
-        artList.add(new Article("sjd", "Super produit", "j'ai dit super produit", 2345.0));
-        artList.add(new Article("sjd", "Super produit", "j'ai dit super produit", 2345.0));
-        artList.add(new Article("sjd", "Super produit", "j'ai dit super produit", 2345.0));
+        artList.add(new Article(1, "limage","Super produit", "j'ai dit super produit", 2345.0 ,2));
+        artList.add(new Article(2, "limage","Super produit", "j'ai dit super produit", 2345.0 ,2));
+
 
         ArticleAdapter artAdapter = new ArticleAdapter(this, artList);
         ListView articlesListView = (ListView)findViewById(R.id.articlesListView);

@@ -10,8 +10,9 @@ public class Article implements Serializable{
     private int id;
     private String img;
     private String name;
-    private String description;
     private Double price;
+    private int catId;
+    private String description;
 
     public int getId() {
         return id;
@@ -21,11 +22,17 @@ public class Article implements Serializable{
         this.id = id;
     }
 
-    public Article(String img, String name, String description, Double price){
+    public Article(int id, String img, String name, String desc ,Double price, int catId){
+        this.id = id;
         this.img = img;
         this.name = name;
-        this.description = description;
         this.price = price;
+        this.catId = catId;
+        this.description = desc;
+    }
+
+    public int getCatId(){
+        return this.catId;
     }
 
     public String getImg() {
@@ -34,14 +41,6 @@ public class Article implements Serializable{
 
     public void setImg(String img) {
         this.img = img;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getName() {
