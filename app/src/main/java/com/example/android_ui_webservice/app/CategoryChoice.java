@@ -3,6 +3,7 @@ package com.example.android_ui_webservice.app;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,23 +11,44 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CategoryChoice extends Activity {
 
-    public String[] catItems = new String[] { "TEUB1" , "TEUB2", "TEUB3", "TEUB4", "TEUB5", "TEUB6", "TEUB7", "TEUB8", "TEUB9", "TEUB10"  };
-
+    public List<String> catItems = new ArrayList<String>() {{ add("TEUB1"); add("TEUB2"); add("TEUB3");  }};
+    private List<Category> catList = new ArrayList<Category>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_choice);
 
-         ArrayAdapter<String> CatAdapter ;
-        CatAdapter = new ArrayAdapter<String>(this, R.id.listViewCat, catItems);
+        /*
+        catList = getCategories();
+        for(Category c : catList)
+            catItems.add(c.getName());
+        */
+
+        ArrayAdapter<String> CatAdapter ;
+        CatAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, catItems);
         ListView listview = (ListView ) findViewById(R.id.listViewCat);
         listview.setAdapter(CatAdapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String catName = (String)parent.getItemAtPosition(position);
+                Category c = getCategoryByName(catName);
+
+                Intent intent = new Intent(parent.getContext(), ArticlesOverview.class);
+                intent.putExtra(ArticlesOverview.CATEGORY_PARENT, c);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -47,6 +69,14 @@ public class CategoryChoice extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private Category getCategoryByName(String catName){
+        for (Category c : catList){
+            if (c.getName() == catName)
+                return c;
+        }
+        return null;
     }
 
 }

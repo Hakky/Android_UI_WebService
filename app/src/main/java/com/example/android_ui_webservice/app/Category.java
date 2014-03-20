@@ -1,12 +1,16 @@
 package com.example.android_ui_webservice.app;
 
 
-public class Category {
+import java.io.Serializable;
+
+public class Category implements Serializable{
     private int id;
     private String name;
-    private double string;
-    private String url_image;
 
+    public Category(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
 
     public int getId() {
         return id;
@@ -24,19 +28,4 @@ public class Category {
         this.name = name;
     }
 
-    public double getString() {
-        return string;
-    }
-
-    public void setString(double string) {
-        this.string = string;
-    }
-
-    public String getUrl_image() {
-        return url_image;
-    }
-
-    public void setUrl_image(String url_image) {
-        this.url_image = url_image;
-    }
 }

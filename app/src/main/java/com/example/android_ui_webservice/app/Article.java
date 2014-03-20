@@ -1,14 +1,25 @@
 package com.example.android_ui_webservice.app;
 
+import java.io.Serializable;
+
 /**
  * Created by marc on 06/03/14.
  */
-public class Article {
+public class Article implements Serializable{
 
+    private int id;
     private String img;
     private String name;
     private String description;
     private Double price;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Article(String img, String name, String description, Double price){
         this.img = img;

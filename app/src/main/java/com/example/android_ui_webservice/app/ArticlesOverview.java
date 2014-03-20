@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +17,17 @@ import java.util.List;
 public class ArticlesOverview extends Activity {
 
     private List<Article> artList = new ArrayList<Article>();
+    public static final String CATEGORY_PARENT = "category_parent";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_articles_overview);
+
+        Category category = (Category)getIntent().getSerializableExtra(CATEGORY_PARENT);
+        TextView title = (TextView)findViewById(R.id.category_name);
+        title.setText(category.getName());
+        //artList = category.getArticles();
 
         artList.add(new Article("sjd", "Super produit", "j'ai dit super produit", 2345.0));
         artList.add(new Article("sjd", "Super produit", "j'ai dit super produit", 2345.0));
@@ -34,6 +42,17 @@ public class ArticlesOverview extends Activity {
         ListView articlesListView = (ListView)findViewById(R.id.articlesListView);
         articlesListView.setAdapter(artAdapter);
         artAdapter.notifyDataSetChanged();
+        articlesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Article a = (Article)parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(parent.getContext(), ArticleDetails.class);
+                intent.putExtra(ArticleDetails.ARTICLE_ITEM, a);
+                startActivity(intent);
+            }
+        });
     }
 
 
