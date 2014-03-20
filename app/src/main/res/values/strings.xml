@@ -3,6 +3,8 @@
 
     <string name="app_name">Android_UI_WebService</string>
     <string name="hello_world">Hello world!</string>
+    <string name="cat_list_title">Categories</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_category_choice">Categories</string>
 
 </resources>
