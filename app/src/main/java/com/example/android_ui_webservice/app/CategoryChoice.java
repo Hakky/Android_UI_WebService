@@ -14,13 +14,14 @@ import android.os.Build;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryChoice extends Activity {
 
-    public List<String> catItems = new ArrayList<String>() {{ add("TEUB1"); add("TEUB2"); add("TEUB3");  }};
+    public List<String> catItems = new ArrayList<String>() {{ add("Catégorie 1"); add("Catégorie 2"); add("Catégorie 3");  }};
     private List<Category> catList = new ArrayList<Category>();
 
     @Override
@@ -28,11 +29,13 @@ public class CategoryChoice extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_choice);
 
-        /*
-        catList = getCategories();
+        TextView title = (TextView)findViewById(R.id.title);
+        title.setText("Catégories");
+
+        WebService ws = new WebService();
+        catList = ws.getCategoriesAndAticles();
         for(Category c : catList)
             catItems.add(c.getName());
-        */
 
         ArrayAdapter<String> CatAdapter ;
         CatAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, catItems);
@@ -76,7 +79,7 @@ public class CategoryChoice extends Activity {
             if (c.getName() == catName)
                 return c;
         }
-        return null;
+        return /*new Category(2, "Catégorie 2");*/null;
     }
 
 }

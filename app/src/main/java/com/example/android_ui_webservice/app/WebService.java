@@ -15,8 +15,8 @@ public class WebService {
     ServiceHandler sh;
 
     WebService(){
-        String apiPath = "http://webservicecommande-85865.euw1.nitrousbox.com/";
-        ServiceHandler sh = new ServiceHandler();
+        apiPath = "http://webservicecommande-85865.euw1.nitrousbox.com/";
+        sh = new ServiceHandler();
     }
 
     public List<Category> getCategoriesAndArticles(){
