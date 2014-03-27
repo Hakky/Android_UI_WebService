@@ -32,11 +32,10 @@ public class CategoryChoice extends Activity {
         TextView title = (TextView)findViewById(R.id.title);
         title.setText("Catégories");
 
-        /*
-        catList = getCategories();
+        WebService ws = new WebService();
+        catList = ws.getCategoriesAndAticles();
         for(Category c : catList)
             catItems.add(c.getName());
-        */
 
         ArrayAdapter<String> CatAdapter ;
         CatAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, catItems);
@@ -80,7 +79,7 @@ public class CategoryChoice extends Activity {
             if (c.getName() == catName)
                 return c;
         }
-        return new Category(2, "Catégorie 2");
+        return /*new Category(2, "Catégorie 2");*/null;
     }
 
 }
