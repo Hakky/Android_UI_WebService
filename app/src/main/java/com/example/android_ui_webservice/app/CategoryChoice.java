@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,6 +24,7 @@ public class CategoryChoice extends Activity {
 
     public List<String> catItems = new ArrayList<String>() {{ add("Catégorie 1"); add("Catégorie 2"); add("Catégorie 3");  }};
     private List<Category> catList = new ArrayList<Category>();
+    ArrayAdapter<String> CatAdapter ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +34,10 @@ public class CategoryChoice extends Activity {
         TextView title = (TextView)findViewById(R.id.title);
         title.setText("Catégories");
 
-        WebService ws = new WebService();
-        catList = ws.getCategoriesAndAticles();
-        for(Category c : catList)
-            catItems.add(c.getName());
 
-        ArrayAdapter<String> CatAdapter ;
+
         CatAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, catItems);
+
         ListView listview = (ListView ) findViewById(R.id.listViewCat);
         listview.setAdapter(CatAdapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -52,7 +51,11 @@ public class CategoryChoice extends Activity {
                 startActivity(intent);
             }
         });
+        WebService ws = new WebService();
+        new RetreiveCategoriesTask().execute(ws);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,4 +85,25 @@ public class CategoryChoice extends Activity {
         return /*new Category(2, "Catégorie 2");*/null;
     }
 
+    public class RetreiveCategoriesTask extends AsyncTask<WebService, Void, List<Category>> {
+
+
+        @Override
+        protected List<Category> doInBackground(WebService... webServices) {
+            int count = webServices.length;
+            ArrayList<Category> res = new ArrayList<Category>();
+
+            for (int i = 0; i < count; i++) {
+                res.addAll(webServices[i].getCategoriesAndArticles());
+            }
+            return res;
+        }
+
+        protected void onPostExecute(List<Category> res) {
+            for(Category c : res ){
+                catItems.add(c.getName());
+            }
+            CatAdapter.notifyDataSetChanged();
+        }
+    }
 }
