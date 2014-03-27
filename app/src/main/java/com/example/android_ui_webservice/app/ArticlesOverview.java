@@ -25,7 +25,7 @@ public class ArticlesOverview extends Activity {
         setContentView(R.layout.activity_articles_overview);
 
         Category category = (Category)getIntent().getSerializableExtra(CATEGORY_PARENT);
-        TextView title = (TextView)findViewById(R.id.category_name);
+        TextView title = (TextView)findViewById(R.id.title);
         title.setText(category.getName());
         //artList = category.getArticles();
 

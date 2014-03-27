@@ -3,11 +3,13 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
 >
+    <include layout="@layout/header"/>
+
     <ListView
         android:id="@+id/listViewCat"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
+    </ListView>
 
-        </ListView>
 </LinearLayout>
 

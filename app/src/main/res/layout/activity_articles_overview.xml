@@ -4,18 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/category_name"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Catégorie 1"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:background="#3498DB"
-        android:textColor="#fff"
-        android:gravity="center_horizontal"
-    />
+    <include layout="@layout/header"/>
 
     <ListView
         android:id="@+id/articlesListView"
