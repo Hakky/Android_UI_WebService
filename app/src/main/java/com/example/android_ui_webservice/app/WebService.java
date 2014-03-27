@@ -1,5 +1,7 @@
 package com.example.android_ui_webservice.app;
 
+import android.os.AsyncTask;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,7 +19,7 @@ public class WebService {
         ServiceHandler sh = new ServiceHandler();
     }
 
-    public List<Category> getCategoriesAndAticles(){
+    public List<Category> getCategoriesAndArticles(){
         List<Category> cats = this.getCategories();
         List<Article> arts = this.getProducts();
 
@@ -84,4 +86,24 @@ public class WebService {
         }
         return res;
     }
+
+
+        public class RetreiveArticleTask extends AsyncTask<WebService, Void, List<Article>> {
+
+
+            @Override
+            protected List<Article> doInBackground(WebService... webServices) {
+                int count = webServices.length;
+                ArrayList<Article> res = new ArrayList<Article>();
+
+                for (int i = 0; i < count; i++) {
+                    res.addAll(webServices[i].getProducts());
+                }
+                return res;
+            }
+
+            protected void onPostExecute(List<Article> res) {
+
+            }
+        }
 }
