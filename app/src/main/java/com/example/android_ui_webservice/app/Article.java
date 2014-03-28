@@ -1,5 +1,7 @@
 package com.example.android_ui_webservice.app;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 /**
@@ -8,7 +10,7 @@ import java.io.Serializable;
 public class Article implements Serializable{
 
     private int id;
-    private String img;
+    private Bitmap img;
     private String name;
     private Double price;
     private int catId;
@@ -22,7 +24,7 @@ public class Article implements Serializable{
         this.id = id;
     }
 
-    public Article(int id, String img, String name, String desc ,Double price, int catId){
+    public Article(int id, Bitmap img, String name, String desc ,Double price, int catId){
         this.id = id;
         this.img = img;
         this.name = name;
@@ -35,11 +37,11 @@ public class Article implements Serializable{
         return this.catId;
     }
 
-    public String getImg() {
+    public Bitmap getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(Bitmap img) {
         this.img = img;
     }
 

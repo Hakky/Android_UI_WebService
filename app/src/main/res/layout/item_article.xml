@@ -6,9 +6,8 @@
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:src="@drawable/ic_article"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
     />
 
     <LinearLayout

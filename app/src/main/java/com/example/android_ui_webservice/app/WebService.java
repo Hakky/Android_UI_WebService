@@ -1,11 +1,19 @@
 package com.example.android_ui_webservice.app;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +57,7 @@ public class WebService {
                 int idCat = cat.getInt("id");
                 String nomCat = cat.getString("name");
 
-                cat.getJSONArray("");
-
+                res.add(new Category(idCat, nomCat));
             }
 
         } catch (JSONException e) {
@@ -74,10 +81,12 @@ public class WebService {
 
                 int idProduct = prod.getInt("id");
                 String nameProduct = prod.getString("name");
+                String description = prod.getString("description");
                 Double price = prod.getDouble("price");
-                String urlImg = prod.getString("url_image");
+                Bitmap urlImg = null;
                 int catId = prod.getInt("category_id");
-                Article ar = new Article(idProduct,urlImg,nameProduct,  "description",price,catId);
+                Article ar = new Article(idProduct,urlImg,nameProduct,description,price,catId);
+                res.add(ar);
 
             }
 
@@ -87,7 +96,24 @@ public class WebService {
         return res;
     }
 
+    public Bitmap getImageUrl(int idProduct){
+        Bitmap res = null;
 
+        String apiRes = sh.makeServiceCall(apiPath+ "products/" + idProduct + ".json" , ServiceHandler.GET);
+        if(apiRes == null || apiRes == "") return res;
+
+        try {
+            JSONObject objectImg = new JSONObject (apiRes);
+            res = BitmapFactory.decodeStream((InputStream)new URL(objectImg.getString("url_image")).getContent());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
 
 
         public class RetreiveArticleTask extends AsyncTask<WebService, Void, List<Article>> {

@@ -1,13 +1,20 @@
 package com.example.android_ui_webservice.app;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,10 +73,10 @@ public class ArticleAdapter extends BaseAdapter {
         }
 
         Article art = articlesList.get(position);
-        //holder.img.setImageResource(art.getImg());
+        holder.img.setImageBitmap(art.getImg());
         holder.name.setText(art.getName());
         holder.description.setText(art.getDescription());
-        holder.price.setText(art.getPrice().toString());
+        holder.price.setText(art.getPrice().toString() + " €");
 
         return convertView;
     }

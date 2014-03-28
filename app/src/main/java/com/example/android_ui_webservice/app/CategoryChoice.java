@@ -22,7 +22,7 @@ import java.util.List;
 
 public class CategoryChoice extends Activity {
 
-    public List<String> catItems = new ArrayList<String>() {{ add("Catégorie 1"); add("Catégorie 2"); add("Catégorie 3");  }};
+    public List<String> catItems = new ArrayList<String>();
     private List<Category> catList = new ArrayList<Category>();
     ArrayAdapter<String> CatAdapter ;
 
@@ -100,7 +100,8 @@ public class CategoryChoice extends Activity {
         }
 
         protected void onPostExecute(List<Category> res) {
-            for(Category c : res ){
+            catList = res;
+            for(Category c : catList){
                 catItems.add(c.getName());
             }
             CatAdapter.notifyDataSetChanged();

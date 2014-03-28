@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -19,12 +20,14 @@ public class ArticleDetails extends Activity {
         setContentView(R.layout.activity_article_details);
 
         Article art = (Article)getIntent().getSerializableExtra(ARTICLE_ITEM);
+        TextView name = (TextView)findViewById(R.id.name);
+        name.setText(art.getName());
         TextView desc = (TextView)findViewById(R.id.description);
-        desc.setText(art.getDescription().toString());
+        desc.setText(art.getDescription());
         TextView price = (TextView)findViewById(R.id.price);
-        price.setText(art.getPrice().toString());
+        price.setText(art.getPrice().toString() + " €");
         ImageView img = (ImageView)findViewById(R.id.art_img);
-        img.setImageURI(Uri.parse(art.getImg().toString()));
+        img.setImageBitmap(art.getImg());
     }
 
     @Override
